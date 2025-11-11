@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-// import Navbar from "./components/Navbar";
+// import Cursor from "./components/Cursor";
 
-const App = () => {
+const Cursor = () => {
 
   
 
@@ -23,14 +23,11 @@ const App = () => {
 
 
   return (
-    <div className="h-screen w-full bg-black cursor-none">
       <div
       id='cursor'
-      className="size-5  rounded-full bg-green-400 fixed top-0 left-0 mix-blend-difference pointer-events-none z-10"
+      className="size-3  rounded-full bg-black fixed top-0 left-0 mix-blend-difference pointer-events-none z-10"
     />
-     <Navbar/>
-    </div>
   );
 };
 
-export default App;
+export default Cursor;
