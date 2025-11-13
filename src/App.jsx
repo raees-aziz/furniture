@@ -8,7 +8,7 @@ const App = () => {
   
   const {scale,radius,width,height}=useCursorStore()
 
-  console.log(typeof scale)
+  // console.log(typeof scale)
 
   useEffect(() => {
   gsap.to("#cursor", {
@@ -38,7 +38,7 @@ const App = () => {
 
 
   return (
-    <div className="h-screen w-full bg-black cursor-none">
+    <div className="h-screen w-full bg-black cursor-none overflow-x-hidden">
       <div
       id='cursor'
       className="size-5 bg-green-400 fixed top-0 left-0 mix-blend-difference pointer-events-none z-10"
