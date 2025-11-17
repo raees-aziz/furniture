@@ -1,68 +1,132 @@
-import React, { useEffect, useRef, useState } from "react";
-import { IoMenu } from "react-icons/io5";
-import { IoClose } from "react-icons/io5";
-import { useCursorStore, navLinks } from "../services.js";
-import { useGSAP } from "@gsap/react";
+import React, { useRef } from "react";
+import { IoMenu, IoClose } from "react-icons/io5";
 import gsap from "gsap";
-
+import { useCursorStore } from "../services";
+import { useGSAP } from "@gsap/react";
 const Navbar = () => {
-  const refOpen=useRef()
-  const refClose=useRef()
-  const [visible, setVisible] = useState(true);
-  const { setScale,setRadius,setSize } = useCursorStore();
-  
+  const { setRadius, setScale, setSize } = useCursorStore();
+  const refOpen = useRef();
+  const refClose = useRef();
 
-useGSAP(()=>{
-  const tl=gsap.timeline({paused:true})
-tl.to('.sideNav',{right:0, duration:0.7})
-tl.from('#nav h4',{y:100,stagger:0.3,duration:0.3,opacity:0})
+  const navLink = [
+    { id: 1, title: "Home", link: "home" },
+    { id: 2, title: "Trainers", link: "trainers" },
+    { id: 3, title: "Pricing", link: "pricing" },
+    { id: 4, title: "About", link: "about" },
+    { id: 5, title: "Contact", link: "contact" },
+  ];
 
+  useGSAP(() => {
+    gsap.from('.navbar li',{
+      y:-50,
+      opacity:0,
+      stagger:0.3,
+      duration:0.2,
+    })
+    const tl = gsap.timeline({ paused: true });
+    tl.to(".navSide", {
+      right: 0,
+      delay: 0.2,
+      duration: 0.3,
+    });
+    tl.from(".h4", {
+      x: 100,
+      stagger: 0.4,
+      duration: 0.4,
+      opacity: 0,
+    });
 
-refOpen.current.addEventListener('click',function(){tl.play()})
-refClose.current.addEventListener('click',function(){tl.reverse()})
-},[])
+    refOpen.current.addEventListener("click", () => tl.play());
+    refClose.current.addEventListener("click", () => tl.reverse());
+  }, []);
 
+  const handleLeave = () => {
+    setScale(1);
+    setRadius(10);
+    setSize(10, 10);
+  };
 
+  const handleHover = () => {
+    setScale(3);
+    setRadius(2);
+    setSize(25, 15);
+  };
 
-  // hovering big size
-  const handleLeave = () => {setScale(1); setRadius(10); setSize(15,15)};
-  const handleHover = () => {setScale(6); setRadius(2); setSize(60,15)}
-  // leaving small size
+  const handleMobileLeave = () => {
+    setScale(1);
+    setRadius(10);
+    setSize(10, 10);
+  };
+
+  const handleMobileHover = () => {
+    setScale(3);
+    setRadius(2);
+    setSize(35, 15);
+  };
 
   return (
-    <nav className="h-25 w-full bg-red-500 relative">
-      <div className="size-full bg-yellow-400 px-4 flex items-center justify-between">
-        <h4 className="text-6xl text-black font-extrabold">Vecna</h4>
-        <IoMenu className="text-6xl" ref={refOpen}/>
+    <nav className="h-20 container mx-auto mt-5  top-5 rounded-full flex items-center justify-between px-6 md:px-0">
+      {/* logo */}
+      <div className="size-20">
+        <img className="rounded-full" src="/image/logo.png" alt="" />
       </div>
-      {/* side navbar */}
-      {/* {visible && ( */}
-        <div  className="sideNav h-screen w-2/5 top-0 -right-[40%]  bg-blue-700 opacity absolute">
-          <div className="flex flex-col items-center relative">
-            {/* close icone */}
-            {/* nav links */}
-            <div
-              id="nav"
-              className="flex justify-center items-center pl-10 flex-col gap-8 w-full h-screen"
+      {/* mid section */}
+      <div className="md:block hidden">
+        <ul className="navbar flex justify-center items-center gap-5">
+          {navLink.map(({ id, title, link }) => (
+            <li
+              onMouseEnter={handleHover}
+              onMouseLeave={handleLeave}
+              className="font-smibold font-bebas-neue text-2xl text-main"
+              key={id}
             >
-              {navLinks.map(({ name, id }) => (
-                <h4
-                  key={id}
-                  onMouseEnter={handleHover}
-                  onMouseLeave={handleLeave}
-                  className="text-7xl font-extrabold "
-                >
-                  {name}
-                </h4>
-              ))}
-            </div>
+              {title}
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* end section */}
+      <div className=" h-15 mr-5 flex items-center justify-center">
+        <button
+          onMouseEnter={handleHover}
+          onMouseLeave={handleLeave}
+          className="bg-main text-primary font-bebas-neue font-bold px-10 py-2 rounded-3xl hidden md:block"
+        >
+          Join Now
+        </button>
+      </div>
+      {/* mobile screen navbar */}
+      <div className="block md:hidden">
+        <IoMenu
+          ref={refOpen}
+          className="text-5xl text-main bg-primary rounded-2xl"
+        />
+        <div className="navSide h-screen w-full fixed z-100 top-0 right-[-100%] overflow-hidden">
+          <ul className=" flex justify-center items-center flex-col gap-10 bg-primary h-screen">
+            {navLink.map(({ title, id }) => (
+              <h4
+                onMouseEnter={handleMobileHover}
+                onMouseLeave={handleMobileLeave}
+                className="h4 text-3xl text-main font-bold font-bebas-neue"
+                key={id}
+              >
+                {title}
+              </h4>
+            ))}
+            <h4
+              onMouseEnter={handleMobileHover}
+              onMouseLeave={handleMobileLeave}
+              className="h4 text-3xl text-main font-bold font-bebas-neue"
+            >
+              Join Now
+            </h4>
             <IoClose
-              className="text-6xl absolute  right-4 top-5"
               ref={refClose}
+              className="text-4xl bg-main absolute top-10 right-10 rounded-full"
             />
-          </div>
+          </ul>
         </div>
-      // {/* // )} */}
+      </div>
     </nav>
   );
 };

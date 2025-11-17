@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Navbar from "./Components/Navbar";
+import Hero from "./Components/Hero";
 import { useCursorStore } from "./services";
 
 
@@ -38,12 +39,10 @@ const App = () => {
 
 
   return (
-    <div className="h-screen w-full bg-black cursor-none overflow-x-hidden">
-      <div
-      id='cursor'
-      className="size-5 bg-green-400 fixed top-0 left-0 mix-blend-difference pointer-events-none z-10"
-    />
-     <Navbar/>
+    <div className="overflow-hidden cursor-none w-screen min-h-screen bg-[url('/image/builder-2.jpg')] bg-no-repeat bg-center bg-cover">
+      <div id="cursor" className="size-5 bg-main fixed top-0 left-0 mix-blend-difference pointer-events-none z-[9999] will-change-transform" />
+      <Navbar/>
+     <Hero/>
     </div>
   );
 };

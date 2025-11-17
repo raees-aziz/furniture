@@ -1,1 +1,19 @@
 @import "tailwindcss";
+/* @import url('/Font/BebasNeue-Regular.ttf'); */
+
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url("/Font/BebasNeue-Regular.ttf") format("truetype");
+}
+
+@theme {
+    --color-main: #7afc16;
+    --color-primary: #0d1419;
+     --font-bebas-neue: "Bebas Neue", sans-serif;
+    --font-serif: "DM Serif Text", serif; 
+}
+
+html, body {
+  overflow-x: hidden !important;
+}
