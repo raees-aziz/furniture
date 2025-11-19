@@ -9,11 +9,15 @@
 
 @theme {
     --color-main: #7afc16;
-    --color-primary: #0d1419;
+    --color-primary: #232b2b;
      --font-bebas-neue: "Bebas Neue", sans-serif;
     --font-serif: "DM Serif Text", serif; 
 }
 
 html, body {
   overflow-x: hidden !important;
+}
+
+@utility background-gradient{
+@apply bg-radial from-green-900 from-0% to-slate-900
 }

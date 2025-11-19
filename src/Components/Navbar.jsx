@@ -65,7 +65,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="h-20 container mx-auto mt-5  top-5 rounded-full flex items-center justify-between px-6 md:px-0">
+    <nav className="h-20 w-full mx-auto mt-5 absolute top-0 rounded-full flex items-center justify-between px-6 ">
       {/* logo */}
       <div className="size-20">
         <img className="rounded-full" src="/image/logo.png" alt="" />
