@@ -7,6 +7,7 @@ import { useCursorStore } from "./services";
 import Benefits from "./Components/Benefits";
 import Services from "./Components/Services";
 import MotivateText from "./Components/MotivateText";
+import Builder from "./Components/Builder";
 import Video from "./Components/mini components/Video";
 
 const App = () => {
@@ -49,6 +50,7 @@ const App = () => {
       <Navbar/>
     </div>
     <MotivateText/>
+    <Builder/>
     </div>
       
   );
