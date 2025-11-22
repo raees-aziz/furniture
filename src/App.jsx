@@ -42,7 +42,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-slate-900 cursor-none">
+    <div className="bg-slate-900 cursor-none overflow-hidden">
        <div id="cursor" className="size-5 bg-main fixed top-0 left-0 mix-blend-difference pointer-events-none z-[9999] " />
     <div className="h-screen w-screen">
 
@@ -50,7 +50,8 @@ const App = () => {
       <Navbar/>
     </div>
     <MotivateText/>
-    <Builder/>
+    {/* <Builder/> */}
+    {/* <Builder/> */}
     </div>
       
   );

@@ -1,65 +1,90 @@
-import React, { useRef ,useEffect} from "react";
+import React, { useRef, useEffect } from "react";
+import { LiaNutritionix } from "react-icons/lia";
+import { MdTrackChanges } from "react-icons/md";
+import { MdOutlineFitnessCenter } from "react-icons/md";
+import { IoFitnessSharp } from "react-icons/io5";
+import { MdCardMembership } from "react-icons/md";
+import { HiUserGroup } from "react-icons/hi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-
+import BulletPoint from './mini components/BulletPoint.jsx'
 
 const Builder = () => {
-const containerRef=useRef()
-const maskRef=useRef()
-const bgRef=useRef()
+  const containerRef = useRef();
+  const maskRef = useRef();
+  const textRef = useRef();
+  const pointRef = useRef();
+  const scaleRef = useRef();
 
-    useEffect(() => {
+  
+useEffect(() => {
   gsap.registerPlugin(ScrollTrigger);
+
+  // Multiple bullet points
+  const bullets = gsap.utils.toArray(".bullet-item");
 
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: containerRef.current,
-      start: "top 40%",
-      end: "top 20%",
-      scrub: true,
-      markers: true,
-    },
+      trigger: scaleRef.current,
+      start: "top 60%",
+      end: "top 10%",
+      scrub: 2,
+      // markers: true
+    }
   });
 
-  // Foreground mask scale
-  tl.to(maskRef.current, {
-    scale: 1.5,
-    ease: "power2.out",
-  }, 0);
+  tl.to(textRef.current, {
+    opacity: 0,
+    duration: 1.2,
+    ease: "power1.inOut",
+  });
 
-  // Background image adjust to fit square
-  tl.to(bgRef.current, {
-    scale: 1,
-    width: "100%",
-    height: "100%",
-    ease: "power2.out",
-  }, 0);
+  tl.to(maskRef.current, {
+    scale: 1.3,
+    borderRadius: 300,
+    duration: 2,
+    maskSize: "400%",
+    ease: "power2.inOut",
+  });
+
+  // now stagger works (multiple elements)
+  tl.from(bullets, {
+    opacity: 0,
+    y: 20,
+    stagger: 0.2,
+    ease: "power1.out",
+  });
 
 }, []);
 
-  return (
-    <section className="max-w-6xl mx-auto px-5">
-      <div className="h-screen w-full ">
-        {/* masked image */}
-        <div 
-  ref={containerRef}
-  className="relative w-[400px] h-[400px] mx-auto mt-[200px] overflow-hidden"
->
-  {/* Background Image */}
-  <img
-    ref={bgRef}
-    src="/image/builder-2.jpg"
-    className="absolute top-0 left-0 w-[120%] h-[120%] object-cover"
-  />
 
-  {/* Mask Image */}
-  <img
-    ref={maskRef}
-    src="/image/builder-1.png"
-    className="absolute inset-0 w-full h-full object-contain mask-custom"
-  />
+  return (
+    <section className="max-w-7xl mx-auto px-5 overflow-hidden ">
+      <div className="h-screen w-full py-4 relative">
+        {/* masked-1  */}
+             <div ref={scaleRef} className=" flex justify-center items-center flex-col">
+              {/* <div> */}
+                <h2 ref={textRef} className="text-[8vw] text-white font-bold font-bebas-neue">Benefit of our gym</h2>
+              {/* </div> */}
+            <img ref={maskRef}
+              className="masked-img w-full h-80 object-cover "
+              src="/image/builder-2.jpg"
+              alt="trainer"
+            />
+           <div ref={pointRef} className="absolute bullet flex bottom-70 gap-30 bg-black">
+  <div className="flex p-2 flex-col gap-6 text-main">
+    <BulletPoint text="Nutrition Guidance" icon={<LiaNutritionix />} extraClass="bullet-item" />
+    <BulletPoint text="Progress Tracking" icon={<MdTrackChanges />} extraClass="bullet-item" />
+    <BulletPoint text="Community Supports" icon={<HiUserGroup />} extraClass="bullet-item" />
+  </div>
+  <div className="flex p-2 flex-col gap-6 text-main">
+    <BulletPoint text="Expert Trainer" icon={<MdOutlineFitnessCenter />} extraClass="bullet-item" />
+    <BulletPoint text="Premium Membership" icon={<MdCardMembership />} extraClass="bullet-item" />
+    <BulletPoint text="Next-Level Fitness" icon={<IoFitnessSharp />} extraClass="bullet-item" />
+  </div>
 </div>
 
+          </div>
       </div>
     </section>
   );
