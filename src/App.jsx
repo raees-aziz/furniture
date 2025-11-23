@@ -8,6 +8,9 @@ import Benefits from "./Components/Benefits";
 import Services from "./Components/Services";
 import MotivateText from "./Components/MotivateText";
 import Builder from "./Components/Builder";
+import BigText from "./Components/BigText";
+import PricingCard from "./Components/Trainers";
+import Pricing from "./Components/Pricing";
 import Video from "./Components/mini components/Video";
 
 const App = () => {
@@ -42,7 +45,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-slate-900 cursor-none overflow-hidden">
+    <div className="cursor-none overflow-hidden">
        <div id="cursor" className="size-5 bg-main fixed top-0 left-0 mix-blend-difference pointer-events-none z-[9999] " />
     <div className="h-screen w-screen">
 
@@ -50,7 +53,10 @@ const App = () => {
       <Navbar/>
     </div>
     <MotivateText/>
-    {/* <Builder/> */}
+    <PricingCard/>
+    <Pricing/>
+    
+    {/* <BigText/> */}
     {/* <Builder/> */}
     </div>
       

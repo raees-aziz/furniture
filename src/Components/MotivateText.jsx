@@ -51,7 +51,7 @@ const MotivateText = () => {
   };
 
   return (
-    <div ref={animateRef} className=" max-w-6xl mx-auto px-5 overflow-hidden">
+    <div ref={animateRef} className=" max-w-7xl mx-auto px-5 overflow-hidden radial-gradient">
       <div
         className="px-4 py-10"
         onMouseEnter={handleMobileHover}

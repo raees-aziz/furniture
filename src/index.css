@@ -16,6 +16,7 @@
 
 html, body {
   overflow-x: hidden !important;
+  background-color: #030303;
 }
 
 @utility background-gradient{
@@ -29,3 +30,11 @@ html, body {
     mask-size: 50%;
 }
 
+@utility radial-gradient {
+    background: radial-gradient(
+            circle at center,
+            #434343 0%,
+            #000 50%,
+            transparent 100%
+    );
+}
