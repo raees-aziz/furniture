@@ -10,7 +10,7 @@ const Card = ({ src, name }) => {
             <p className="absolute top-0 z-1 font-bebas-neue text-5xl mt-10">
               {name}
             </p>
-            <img className="object-cover size-full" src={src} alt="" />
+            <img className="object-cover size-full rounded-2xl" src={src} alt="" />
             <button className="absolute bottom-10 md:hidden block text:md font-bebas-neue py-4 px-2 bg-slate-950 rounded-2xl w-40 text-main">
               Hit me 👊
             </button>
@@ -23,7 +23,7 @@ const Card = ({ src, name }) => {
             <p className="text-main text-4xl font-bold">timing</p>
             <p className="text-lg text-white ">9:00 to 5:00</p>
             <p className="text-main text-4xl font-bold">Contact</p>
-            <p className="text-lg text-white font-serif lowercase">
+            <p className="text-lg text-white font-bebas-neue">
               email:xyz@gmail.com
             </p>
             <p className="text-lg text-white ">030xxxxxx44</p>
@@ -69,8 +69,8 @@ const StyledWrapper = styled.div`
     display: flex;
     // flex-direction:column;
     align-items: center;
-    border: 5px solid #7afc16;
-    border-radius: 10px;
+    border: px solid #7afc16;
+    border-radius: 20px;
     justify-content: center;
     font-size: 24px;
     transform: rotateY(0deg);
@@ -87,8 +87,8 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 5px solid white;
-    border-radius: 10px;
+    border: 1px solid white;
+    border-radius: 20px;
     justify-content: center;
     // font-size: 24px;
     transform: rotateY(180deg);

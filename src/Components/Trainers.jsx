@@ -8,9 +8,9 @@ const Trainers = () => {
         {/*  */}
         <h3 className="text-8xl text-white font-bold font-bebas-neue text-center">Trainers</h3>
         <div className="flex flex-col h-auto md:flex-row justify-between md:gap-0 gap-10 items-center px-10 md:px-0 py-10">
-          <Card name={"RAEES"} src={'/image/builder-1.png'} />
-          <Card name={"idrees"} src={'/image/builder-2.jpg'} />
-          <Card name={"moiz"} src={'/image/builder-1.png'} />
+          <Card name={"jacob"} src={'/image/trainer-1.jpg'} />
+          <Card name={"andrew"} src={'/image/builder-2.jpg'} />
+          <Card name={"elizabeth"} src={'/image/trainer-2.jpg'} />
          
         </div>
       </div>
