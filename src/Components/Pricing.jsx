@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const gymPlans = [
   {
@@ -59,31 +59,74 @@ const gymPlans = [
 ];
 
 const Pricing = () => {
-  const heigtRef = useRef(null);
+  const cardRefs = useRef([]);
 
   useEffect(() => {
-    heigtRef.current.addEventListener("click", () => console.log("clik"));
+    cardRefs.current.forEach((card) => {
+      const pointsBox = card.querySelector(".points-box");
+      const pointsItems = card.querySelectorAll(".points-box li");
+
+      gsap.set(pointsBox, { height: 0, opacity: 0 });
+      gsap.set(pointsItems, { y: 20, opacity: 0 });
+
+      card.addEventListener("mouseenter", () => {
+        gsap.to(pointsBox, {
+          height: "auto",
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        gsap.to(pointsItems, {
+          y: 0,
+          opacity: 1,
+          stagger: 0.05,
+          duration: 0.4,
+        });
+      });
+
+      card.addEventListener("mouseleave", () => {
+        gsap.to(pointsBox, {
+          height: 0,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power2.inOut",
+        });
+
+        gsap.to(pointsItems, {
+          y: 20,
+          opacity: 0,
+          duration: 0.3,
+          stagger: -0.03,
+        });
+      });
+    });
   }, []);
 
   return (
     <main className="max-w-7xl mx-auto px-10">
       <section className="h-auto w-full font-bebas-neue ">
-        <div className="card h-full w-full">
-          {/* heading content */}
-          <div className="rounded-3xl gap-2 flex flex-col">
-            {gymPlans.map(({ name, points }, i) => (
-              <div ref={heigtRef} className={`bg-primary text-white ${i+2}00 rounded-lg hover:h-100 h-40 transition-all duration-500`}>
-                <h1 className="text-8xl text-center pt-10">{name}</h1>
-                <div className="overflow-hidden max-h-0 group-hover:max-h-100  transition-all duration-500">
-                  {/* <p className="p-4">
-               {points.map((i,index)=>(
-                <li key={index}>{i}</li>
-               ))}
-              </p> */}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="rounded-3xl gap-4 flex flex-col">
+          {gymPlans.map(({ name, points }, i) => (
+            <div
+              key={i}
+              ref={(el) => (cardRefs.current[i] = el)}
+              className="bg-primary text-white p-6 rounded-xl "
+            >
+              <h1 className={`text-6xl text-center`}>{name}</h1>
+
+              <ul className={`points-box overflow-hidden bg-[url(/image/full-stop2.jpg)] bg-cover object-cover rounded-3xl  bg-no-repeat`}>
+                {points.map((item, index) => (
+                  <li
+                    className="text-center  text-main text-2xl mt-2"
+                    key={index}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
     </main>
