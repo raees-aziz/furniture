@@ -63,14 +63,17 @@ const Pricing = () => {
 
   useEffect(() => {
     cardRefs.current.forEach((card) => {
-      const pointsBox = card.querySelector(".points-box");
+      const heading = card.querySelector(".plan-heading");
+      const container = card.querySelector(".expand-container");
       const pointsItems = card.querySelectorAll(".points-box li");
 
-      gsap.set(pointsBox, { height: 0, opacity: 0 });
+      // Initial collapsed
+      gsap.set(container, { height: 0, opacity: 0 });
       gsap.set(pointsItems, { y: 20, opacity: 0 });
 
-      card.addEventListener("mouseenter", () => {
-        gsap.to(pointsBox, {
+      // Heading hover → expand
+      heading.addEventListener("mouseenter", () => {
+        gsap.to(container, {
           height: "auto",
           opacity: 1,
           duration: 0.5,
@@ -85,8 +88,9 @@ const Pricing = () => {
         });
       });
 
-      card.addEventListener("mouseleave", () => {
-        gsap.to(pointsBox, {
+      // Container hover leave → collapse
+      container.addEventListener("mouseleave", () => {
+        gsap.to(container, {
           height: 0,
           opacity: 0,
           duration: 0.4,
@@ -96,8 +100,8 @@ const Pricing = () => {
         gsap.to(pointsItems, {
           y: 20,
           opacity: 0,
-          duration: 0.3,
           stagger: -0.03,
+          duration: 0.3,
         });
       });
     });
@@ -105,26 +109,39 @@ const Pricing = () => {
 
   return (
     <main className="max-w-7xl mx-auto px-10">
-      <section className="h-auto w-full font-bebas-neue ">
-        <div className="rounded-3xl gap-4 flex flex-col">
+      <section className="h-auto w-full font-bebas-neue">
+        <div className="rounded-3xl h-full gap-4 flex flex-col">
           {gymPlans.map(({ name, points }, i) => (
             <div
               key={i}
               ref={(el) => (cardRefs.current[i] = el)}
-              className="bg-primary text-white p-6 rounded-xl "
+              className="bg-black text-white p-6 rounded-3xl border border-main/40
+                 shadow-[0_0_25px_rgba(0,255,100,0.5)]
+                 transition-all duration-300"
             >
-              <h1 className={`text-6xl text-center`}>{name}</h1>
+              {/* Heading */}
+              <h1 className="plan-heading text-6xl text-center mb-4 text-main font-bold cursor-pointer">
+                {name}
+              </h1>
 
-              <ul className={`points-box overflow-hidden bg-[url(/image/full-stop2.jpg)] bg-cover object-cover rounded-3xl  bg-no-repeat`}>
-                {points.map((item, index) => (
-                  <li
-                    className="text-center  text-main text-2xl mt-2"
-                    key={index}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              {/* Container wrapping points + image */}
+              <div className="expand-container overflow-hidden">
+                <div className="flex justify-between items-start gap-6">
+                  <ul className="points-box w-1/2 p-4 bg-main/10 rounded-xl">
+                    {points.map((item, index) => (
+                      <li className="text-xl mt-2 text-main" key={index}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <img
+                    src="/image/full-stop2.jpg"
+                    className={`${i==gymPlans.length-1?'h-[600px]':'h-full'} w-[45%] rounded-xl object-cover shadow-[0_0_25px_rgba(0,255,100,0.5)]`}
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
           ))}
         </div>
